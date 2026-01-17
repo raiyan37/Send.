@@ -10,9 +10,22 @@
 		38651E812F1BF0FA00AEFD55 /* rock-climbing-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "rock-climbing-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		38651ED22F1C073400AEFD55 /* Exceptions for "rock-climbing-app" folder in "rock-climbing-app" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 38651E802F1BF0FA00AEFD55 /* rock-climbing-app */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		38651E832F1BF0FA00AEFD55 /* rock-climbing-app */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				38651ED22F1C073400AEFD55 /* Exceptions for "rock-climbing-app" folder in "rock-climbing-app" target */,
+			);
 			path = "rock-climbing-app";
 			sourceTree = "<group>";
 		};
@@ -254,6 +267,8 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "rock-climbing-app/Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Route scanning";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -298,6 +313,8 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "rock-climbing-app/Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Route scanning";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;

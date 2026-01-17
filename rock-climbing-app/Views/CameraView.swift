@@ -9,6 +9,7 @@ import SwiftUI
 import AVFoundation
 
 struct CameraView: View {
+    @StateObject private var cameraManager = CameraManager()
     @State private var isRecording = false
     @State private var showGrid = true
     @State private var captureMode: CaptureMode = .photo
@@ -20,9 +21,33 @@ struct CameraView: View {
     
     var body: some View {
         ZStack {
-            // camera preview placeholder
-            Color.black
-                .ignoresSafeArea()
+            // actual camera preview
+            if cameraManager.isAuthorized {
+                CameraPreviewView(session: cameraManager.session)
+                    .ignoresSafeArea()
+                    .onAppear {
+                        cameraManager.startSession()
+                    }
+                    .onDisappear {
+                        cameraManager.stopSession()
+                    }
+            } else {
+                // fallback if camera not authorized
+                Color.black
+                    .ignoresSafeArea()
+                
+                VStack {
+                    Image(systemName: "camera.fill")
+                        .font(.system(size: 60))
+                        .foregroundColor(.white.opacity(0.5))
+                    Text("Camera access required")
+                        .foregroundColor(.white)
+                        .padding()
+                    Text("Please enable camera access in Settings")
+                        .font(.caption)
+                        .foregroundColor(.white.opacity(0.7))
+                }
+            }
             
             // grid overlay
             if showGrid {
@@ -44,7 +69,7 @@ struct CameraView: View {
                     Spacer()
                     
                     Button(action: {
-                        // TODO: switch camera
+                        cameraManager.switchCamera()
                     }) {
                         Image(systemName: "arrow.triangle.2.circlepath.camera")
                             .font(.title2)
@@ -97,9 +122,11 @@ struct CameraView: View {
     }
     
     private func handleCapture() {
-        // TODO: implement camera capture logic
-        if captureMode == .video {
+        if captureMode == .photo {
+            cameraManager.takePhoto()
+        } else {
             isRecording.toggle()
+            // TODO: implement video recording
         }
     }
 }

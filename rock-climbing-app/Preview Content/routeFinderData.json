@@ -1,0 +1,131 @@
+{
+  "id": "wall-001",
+  "name": "The Overhang Challenge",
+  "dimensions": {
+    "width": 20,
+    "height": 30
+  },
+  "angle": 15,
+  "holds": [
+    {
+      "id": "hold-001",
+      "position": { "x": 3, "y": 2 },
+      "type": "jug",
+      "difficulty": 2,
+      "size": "large",
+      "color": "blue"
+    },
+    {
+      "id": "hold-002",
+      "position": { "x": 5, "y": 2 },
+      "type": "jug",
+      "difficulty": 2,
+      "size": "large",
+      "color": "blue"
+    },
+    {
+      "id": "hold-003",
+      "position": { "x": 7, "y": 4 },
+      "type": "crimp",
+      "difficulty": 6,
+      "size": "small",
+      "color": "blue"
+    },
+    {
+      "id": "hold-004",
+      "position": { "x": 4, "y": 5 },
+      "type": "pocket",
+      "difficulty": 5,
+      "size": "medium",
+      "color": "blue"
+    },
+    {
+      "id": "hold-005",
+      "position": { "x": 9, "y": 7 },
+      "type": "sloper",
+      "difficulty": 7,
+      "size": "large",
+      "color": "blue"
+    },
+    {
+      "id": "hold-006",
+      "position": { "x": 6, "y": 8 },
+      "type": "pinch",
+      "difficulty": 6,
+      "size": "medium",
+      "color": "blue"
+    },
+    {
+      "id": "hold-007",
+      "position": { "x": 11, "y": 10 },
+      "type": "jug",
+      "difficulty": 3,
+      "size": "large",
+      "color": "blue"
+    },
+    {
+      "id": "hold-008",
+      "position": { "x": 8, "y": 12 },
+      "type": "crimp",
+      "difficulty": 7,
+      "size": "small",
+      "color": "blue"
+    },
+    {
+      "id": "hold-009",
+      "position": { "x": 13, "y": 14 },
+      "type": "undercling",
+      "difficulty": 8,
+      "size": "medium",
+      "color": "blue"
+    },
+    {
+      "id": "hold-010",
+      "position": { "x": 10, "y": 16 },
+      "type": "jug",
+      "difficulty": 2,
+      "size": "large",
+      "color": "blue"
+    },
+    {
+      "id": "hold-011",
+      "position": { "x": 15, "y": 18 },
+      "type": "sloper",
+      "difficulty": 6,
+      "size": "large",
+      "color": "blue"
+    },
+    {
+      "id": "hold-012",
+      "position": { "x": 12, "y": 20 },
+      "type": "crimp",
+      "difficulty": 7,
+      "size": "small",
+      "color": "blue"
+    },
+    {
+      "id": "hold-013",
+      "position": { "x": 17, "y": 22 },
+      "type": "jug",
+      "difficulty": 3,
+      "size": "large",
+      "color": "blue"
+    },
+    {
+      "id": "hold-014",
+      "position": { "x": 14, "y": 24 },
+      "type": "pocket",
+      "difficulty": 6,
+      "size": "medium",
+      "color": "blue"
+    },
+    {
+      "id": "hold-015",
+      "position": { "x": 16, "y": 27 },
+      "type": "jug",
+      "difficulty": 1,
+      "size": "large",
+      "color": "blue"
+    }
+  ]
+}
