@@ -1,0 +1,131 @@
+{
+    "courseName" : "Data Structures & Algorithms",
+    "courseCode" : "CSC 203",
+    "color" : "#2b7fff",
+    "assignments" : [
+        {
+          "id": 1,
+          "title": "Midterm 1: Linear Data Structures",
+          "submissionType": "ADMIN_SCAN",
+          "dueDate": "2026-01-15T23:59:00Z",
+          "createdAt": "2025-12-10T18:30:00Z",
+          "numSubmitted" : 9,
+          "totalStudents" : 11
+        },
+        {
+          "id": 2,
+          "title": "Lab 3: Binary Search Trees",
+          "submissionType": "STUDENT_SCAN",
+          "dueDate": "2026-02-01T23:59:00Z",
+          "createdAt": "2025-12-18T16:00:00Z",
+          "numSubmitted" : 4,
+          "totalStudents" : 11
+        }
+    ],
+    "users" : [
+        {
+          "id": 101,
+          "firstName": "Lucian",
+          "lastName": "Cheng",
+          "email" : "l.cheng24@university.edu",
+          "role": "STUDENT",
+          "enrollmentId" : 1
+        },
+        {
+          "id": 102,
+          "firstName": "George",
+          "lastName": "Fares",
+          "email" : "g.fares@university.edu",
+          "role": "OWNER",
+          "enrollmentId" : 2
+        },
+        {
+          "id": 103,
+          "firstName": "Satvik",
+          "lastName": "Singh",
+          "email" : "s.singh@university.edu",
+          "role": "STUDENT",
+          "enrollmentId" : 3
+        },
+        {
+          "id": 104,
+          "firstName": "Yogesh",
+          "lastName": "Patel",
+          "email" : "y.patel@university.edu",
+          "role": "STUDENT",
+          "enrollmentId" : 4
+        },
+        {
+          "id": 105,
+          "firstName": "Jaspreet",
+          "lastName": "Khader",
+          "email" : "j.khader@university.edu",
+          "role": "STUDENT",
+          "enrollmentId" : 5
+        },
+        {
+          "id": 106,
+          "firstName": "Jonathan",
+          "lastName": "Sanchez",
+          "email" : "j.sanchez@university.edu",
+          "role": "STUDENT",
+          "enrollmentId" : 6
+        },
+        {
+          "id": 107,
+          "firstName": "Michael",
+          "lastName": "Mobius",
+          "email" : "m.mobius@university.edu",
+          "role": "STUDENT",
+          "enrollmentId" : 7
+        },
+        {
+          "id": 108,
+          "firstName": "Sebastian",
+          "lastName": "Chirila",
+          "email" : "s.chirila@university.edu",
+          "role": "ADMIN",
+          "enrollmentId" : 8
+        },
+        {
+          "id": 109,
+          "firstName": "Christopher",
+          "lastName": "Sarjoo",
+          "email" : "c.sarjoo@university.edu",
+          "role": "STUDENT",
+          "enrollmentId" : 9
+        },
+        {
+          "id": 110,
+          "firstName": "Vincent",
+          "lastName": "Lombardi",
+          "email" : "v.lombardi@university.edu",
+          "role": "STUDENT",
+          "enrollmentId" : 10
+        },
+        {
+          "id": 111,
+          "firstName": "Luc",
+          "lastName": "Rajotte",
+          "email" : "l.rajotte@university.edu",
+          "role": "STUDENT",
+          "enrollmentId" : 11
+        },
+        {
+          "id": 112,
+          "firstName": "Dajun",
+          "lastName": "Liang",
+          "email" : "d.liang@university.edu",
+          "role": "STUDENT",
+          "enrollmentId" : 12
+        },
+        {
+          "id": 113,
+          "firstName": "Kylie",
+          "lastName": "Yang",
+          "email" : "k.yang@university.edu",
+          "role": "STUDENT",
+          "enrollmentId" : 13
+        }
+    ]
+}
