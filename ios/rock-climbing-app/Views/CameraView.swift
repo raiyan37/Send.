@@ -7,12 +7,18 @@
 
 import SwiftUI
 import AVFoundation
+import Combine
+import UIKit
 
 struct CameraView: View {
     @StateObject private var cameraManager = CameraManager()
     @State private var isRecording = false
     @State private var showGrid = true
     @State private var captureMode: CaptureMode = .photo
+    @State private var isGeneratingRoute = false
+    @State private var routeImage: UIImage?
+    @State private var showRouteAnalysis = false
+    @State private var errorMessage: String?
     
     enum CaptureMode {
         case photo
@@ -21,6 +27,14 @@ struct CameraView: View {
     
     var body: some View {
         ZStack {
+            NavigationLink(
+                destination: RouteAnalysisView(analyzedImage: routeImage),
+                isActive: $showRouteAnalysis
+            ) {
+                EmptyView()
+            }
+            .hidden()
+
             // actual camera preview
             if cameraManager.isAuthorized {
                 CameraPreviewView(session: cameraManager.session)
@@ -119,14 +133,73 @@ struct CameraView: View {
         #if !os(macOS)
         .navigationBarTitleDisplayMode(.inline)
         #endif
+        .onReceive(cameraManager.$capturedPhotoData) { newData in
+            guard let newData else { return }
+            guard !isGeneratingRoute else { return }
+            Task { await generateRoute(imageData: newData) }
+        }
+        .overlay {
+            if isGeneratingRoute {
+                ZStack {
+                    Color.black.opacity(0.5)
+                        .ignoresSafeArea()
+                    ProgressView("Generating route…")
+                        .padding()
+                        .background(Color.black.opacity(0.7))
+                        .foregroundColor(.white)
+                        .cornerRadius(12)
+                }
+            }
+        }
+        .alert(
+            "Route generation failed",
+            isPresented: Binding(
+                get: { errorMessage != nil },
+                set: { isPresented in
+                    if !isPresented { errorMessage = nil }
+                }
+            )
+        ) {
+            Button("OK", role: .cancel) { errorMessage = nil }
+        } message: {
+            Text(errorMessage ?? "")
+        }
     }
     
     private func handleCapture() {
+        guard !isGeneratingRoute else { return }
         if captureMode == .photo {
             cameraManager.takePhoto()
         } else {
             isRecording.toggle()
             // TODO: implement video recording
+        }
+    }
+
+    @MainActor
+    private func generateRoute(imageData: Data) async {
+        isGeneratingRoute = true
+        defer { isGeneratingRoute = false }
+
+        do {
+            let responseData = try await APIClient.shared.uploadMultipart(
+                path: "/boulder/generate",
+                data: imageData,
+                filename: "wall.jpg",
+                mimeType: "image/jpeg"
+            )
+
+            guard let image = UIImage(data: responseData) else {
+                errorMessage = "Invalid image returned by server"
+                return
+            }
+
+            routeImage = image
+            showRouteAnalysis = true
+        } catch let apiError as APIError {
+            errorMessage = apiError.message
+        } catch {
+            errorMessage = error.localizedDescription
         }
     }
 }

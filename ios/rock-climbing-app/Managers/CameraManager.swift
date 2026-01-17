@@ -8,11 +8,14 @@
 import AVFoundation
 import SwiftUI
 import Combine
+import UIKit
 
 class CameraManager: NSObject, ObservableObject {
     @Published var isAuthorized = false
     @Published var error: CameraError?
     @Published var session = AVCaptureSession()
+    @Published var capturedPhotoData: Data?
+    @Published var capturedPhotoPreview: UIImage?
     
     private var videoOutput = AVCaptureMovieFileOutput()
     private var photoOutput = AVCapturePhotoOutput()
@@ -23,6 +26,7 @@ class CameraManager: NSObject, ObservableObject {
         case cannotAddInput
         case cannotAddOutput
         case createCaptureInput
+        case photoProcessingFailed
         
         var errorDescription: String? {
             switch self {
@@ -34,6 +38,8 @@ class CameraManager: NSObject, ObservableObject {
                 return "Cannot add camera output"
             case .createCaptureInput:
                 return "Cannot create camera input"
+            case .photoProcessingFailed:
+                return "Failed to process photo"
             }
         }
     }
@@ -150,7 +156,32 @@ class CameraManager: NSObject, ObservableObject {
     
     func takePhoto() {
         let settings = AVCapturePhotoSettings()
+        settings.photoQualityPrioritization = .balanced
         photoOutput.capturePhoto(with: settings, delegate: self)
+    }
+
+    private func prepareUploadJpeg(from rawPhotoData: Data) -> Data? {
+        guard let image = UIImage(data: rawPhotoData) else {
+            return nil
+        }
+
+        let normalized = image.normalized()
+        let resized = normalized.resizedToMaxWidth(1216)
+
+        let maxBytes = 4 * 1024 * 1024
+        var quality: CGFloat = 0.85
+        var jpegData = resized.jpegData(compressionQuality: quality)
+
+        while let data = jpegData, data.count > maxBytes, quality > 0.25 {
+            quality -= 0.1
+            jpegData = resized.jpegData(compressionQuality: quality)
+        }
+
+        guard let data = jpegData, data.count <= maxBytes else {
+            return nil
+        }
+
+        return data
     }
 }
 
@@ -162,10 +193,46 @@ extension CameraManager: AVCapturePhotoCaptureDelegate {
             return
         }
         
-        // TODO: handle photo data
-        if let imageData = photo.fileDataRepresentation() {
-            print("Photo captured successfully, size: \(imageData.count) bytes")
-            // save to photo library or process further
+        guard let imageData = photo.fileDataRepresentation(),
+              let preparedJpegData = prepareUploadJpeg(from: imageData),
+              let previewImage = UIImage(data: preparedJpegData) else {
+            DispatchQueue.main.async { [weak self] in
+                self?.error = .photoProcessingFailed
+            }
+            return
+        }
+
+        DispatchQueue.main.async { [weak self] in
+            self?.capturedPhotoPreview = previewImage
+            self?.capturedPhotoData = preparedJpegData
+        }
+    }
+}
+
+private extension UIImage {
+    func normalized() -> UIImage {
+        if imageOrientation == .up {
+            return self
+        }
+
+        let renderer = UIGraphicsImageRenderer(size: size)
+        return renderer.image { _ in
+            draw(in: CGRect(origin: .zero, size: size))
+        }
+    }
+
+    func resizedToMaxWidth(_ maxWidth: CGFloat) -> UIImage {
+        guard size.width > 0 else { return self }
+
+        let scale = min(1, maxWidth / size.width)
+        if scale == 1 {
+            return self
+        }
+
+        let targetSize = CGSize(width: size.width * scale, height: size.height * scale)
+        let renderer = UIGraphicsImageRenderer(size: targetSize)
+        return renderer.image { _ in
+            draw(in: CGRect(origin: .zero, size: targetSize))
         }
     }
 }

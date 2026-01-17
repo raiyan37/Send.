@@ -1,24 +1,51 @@
 import math
 import cv2
 import imutils
+import numpy as np
 
 from src.model.color import Color
 
 
 class ArucoMarker:
     def __init__(self, aruco_dict: int, image: cv2.typing.MatLike, marker_perimeter_in_cm: float):
+        if image is None:
+            raise ValueError("Invalid image")
+
         img_tmp = imutils.resize(image.copy(), width=1216)
-        gray = cv2.cvtColor(img_tmp, cv2.COLOR_BGR2GRAY)
+        if len(img_tmp.shape) == 2:
+            gray = img_tmp
+        else:
+            gray = cv2.cvtColor(img_tmp, cv2.COLOR_BGR2GRAY)
+
         gray = cv2.GaussianBlur(gray, (7, 7), 0)
 
         dictionary = cv2.aruco.getPredefinedDictionary(aruco_dict)
         params = cv2.aruco.DetectorParameters()
-        markers = cv2.aruco.detectMarkers(gray, dictionary, parameters=params)[0]
 
-        if len(markers) == 0:
+        corners, ids, _ = self.__detect_markers(gray, dictionary, params)
+
+        if len(corners) == 0:
+            border = 10
+            gray_padded = cv2.copyMakeBorder(
+                gray,
+                border,
+                border,
+                border,
+                border,
+                borderType=cv2.BORDER_CONSTANT,
+                value=255,
+            )
+            corners, ids, _ = self.__detect_markers(gray_padded, dictionary, params)
+            if len(corners) > 0:
+                corners = [corner - np.array([border, border], dtype=corner.dtype) for corner in corners]
+
+        if len(corners) == 0:
             raise ValueError("No ArUco marker detected")
 
-        self.corners = markers[0]
+        marker_index = int(np.argmax([cv2.arcLength(corner, True) for corner in corners]))
+
+        self.corners = corners[marker_index]
+        self.marker_id = None if ids is None else int(ids[marker_index][0])
         self.marker_perimeter_in_cm = marker_perimeter_in_cm
 
         # extract the marker corners (which are always returned in
@@ -70,3 +97,11 @@ class ArucoMarker:
         cv2.line(image, self.top_right, self.bottom_right, color.bgr(), thickness)
         cv2.line(image, self.bottom_right, self.bottom_left, color.bgr(), thickness)
         cv2.line(image, self.bottom_left, self.top_left, color.bgr(), thickness)
+
+    @staticmethod
+    def __detect_markers(gray: cv2.typing.MatLike, dictionary: cv2.aruco.Dictionary,
+                         params: cv2.aruco.DetectorParameters):
+        if hasattr(cv2.aruco, "ArucoDetector"):
+            detector = cv2.aruco.ArucoDetector(dictionary, params)
+            return detector.detectMarkers(gray)
+        return cv2.aruco.detectMarkers(gray, dictionary, parameters=params)

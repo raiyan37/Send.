@@ -6,30 +6,43 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct RouteAnalysisView: View {
     @State private var showBoundingBoxes = true
     @State private var showRouteLine = true
     @State private var selectedBeta = 0
+
+    let analyzedImage: UIImage?
+
+    init(analyzedImage: UIImage? = nil) {
+        self.analyzedImage = analyzedImage
+    }
     
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
                 // wall image with overlays
                 ZStack {
-                    // placeholder wall image
-                    Rectangle()
-                        .fill(Color.gray.opacity(0.3))
-                        .aspectRatio(3/4, contentMode: .fit)
-                    
-                    // detected holds overlay
-                    if showBoundingBoxes {
-                        HoldBoundingBoxesOverlay()
-                    }
-                    
-                    // suggested route line
-                    if showRouteLine {
-                        RouteLineOverlay()
+                    if let analyzedImage {
+                        Image(uiImage: analyzedImage)
+                            .resizable()
+                            .scaledToFit()
+                    } else {
+                        // placeholder wall image
+                        Rectangle()
+                            .fill(Color.gray.opacity(0.3))
+                            .aspectRatio(3/4, contentMode: .fit)
+                        
+                        // detected holds overlay
+                        if showBoundingBoxes {
+                            HoldBoundingBoxesOverlay()
+                        }
+                        
+                        // suggested route line
+                        if showRouteLine {
+                            RouteLineOverlay()
+                        }
                     }
                     
                     // difficulty badge
@@ -56,12 +69,14 @@ struct RouteAnalysisView: View {
                     }
                 }
                 
-                // controls
-                HStack(spacing: 20) {
-                    Toggle("Holds", isOn: $showBoundingBoxes)
-                    Toggle("Route", isOn: $showRouteLine)
+                if analyzedImage == nil {
+                    // controls (demo overlays only)
+                    HStack(spacing: 20) {
+                        Toggle("Holds", isOn: $showBoundingBoxes)
+                        Toggle("Route", isOn: $showRouteLine)
+                    }
+                    .padding(.horizontal)
                 }
-                .padding(.horizontal)
                 
                 Divider()
                 
@@ -199,6 +214,6 @@ struct BetaOptionCard: View {
 
 #Preview {
     NavigationView {
-        RouteAnalysisView()
+        RouteAnalysisView(analyzedImage: nil)
     }
 }

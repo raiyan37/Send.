@@ -62,7 +62,7 @@ ClimbingCrux/
 ```bash
 # Clone repository
 git clone https://github.com/raiyan37/rock-climber.git
-cd rock-climber
+cd rock-climber/backend
 
 # Create virtual environment
 python -m venv venv
@@ -119,6 +119,12 @@ docker-compose up -d --build
 
 # Access API
 curl http://localhost:8000/docs
+```
+
+### Tests
+
+```bash
+pytest
 ```
 
 ## Configuration

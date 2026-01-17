@@ -38,23 +38,52 @@ final class APIClient {
     static let shared = APIClient()
     private init() {}
 
-    // TODO: update with actual backend URL when ready
-    private let baseURL = URL(string: "https://your-backend-url.com")!
-    private let apiKey = "your-api-key"
+    private let baseURL: URL = {
+        let urlString = (Bundle.main.object(forInfoDictionaryKey: "BackendBaseURL") as? String)?
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+        let fallback = "http://localhost:8000"
+        return URL(string: (urlString?.isEmpty == false) ? urlString! : fallback)!
+    }()
+
+    private let apiKey: String = {
+        (Bundle.main.object(forInfoDictionaryKey: "BackendAPIKey") as? String) ?? ""
+    }()
+
+    private func makeURL(path: String) -> URL {
+        let normalizedPath = path.hasPrefix("/") ? String(path.dropFirst()) : path
+        return baseURL.appendingPathComponent(normalizedPath)
+    }
+
+    private func errorMessage(from data: Data) -> String {
+        if let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any] {
+            if let detail = json["detail"] as? String, !detail.isEmpty {
+                return detail
+            }
+            if let message = json["message"] as? String, !message.isEmpty {
+                return message
+            }
+        }
+        if let text = String(data: data, encoding: .utf8), !text.isEmpty {
+            return text
+        }
+        return "Request failed"
+    }
 
     func request<T: Decodable>(
         path: String,
         method: HTTPMethod,
         body: Encodable? = nil
     ) async throws -> T {
-        var request = URLRequest(url: baseURL.appendingPathComponent(path))
+        var request = URLRequest(url: makeURL(path: path))
         request.httpMethod = method.rawValue
         
         // standard headers
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         
-        request.setValue(apiKey, forHTTPHeaderField: "x-api-key")
+        if !apiKey.isEmpty {
+            request.setValue(apiKey, forHTTPHeaderField: "x-api-key")
+        }
 
         if let body = body {
             let encoder = JSONEncoder()
@@ -66,7 +95,7 @@ final class APIClient {
 
         guard let http = response as? HTTPURLResponse,
               200..<300 ~= http.statusCode else {
-            throw APIError(message: "Invalid response")
+            throw APIError(message: errorMessage(from: data))
         }
         
         let decoder = JSONDecoder()
@@ -75,15 +104,17 @@ final class APIClient {
     }
     
     func requestData(path: String, method: HTTPMethod) async throws -> Data {
-        var request = URLRequest(url: baseURL.appendingPathComponent(path))
+        var request = URLRequest(url: makeURL(path: path))
         request.httpMethod = method.rawValue
-        request.setValue(apiKey, forHTTPHeaderField: "x-api-key")
+        if !apiKey.isEmpty {
+            request.setValue(apiKey, forHTTPHeaderField: "x-api-key")
+        }
         
         let (data, response) = try await URLSession.shared.data(for: request)
         
         guard let httpResponse = response as? HTTPURLResponse,
               (200...299).contains(httpResponse.statusCode) else {
-            throw URLError(.badServerResponse)
+            throw APIError(message: errorMessage(from: data))
         }
         
         return data
@@ -97,12 +128,14 @@ final class APIClient {
         mimeType: String,
         additionalFields: [String: String] = [:]
     ) async throws -> Data {
-        var request = URLRequest(url: baseURL.appendingPathComponent(path))
+        var request = URLRequest(url: makeURL(path: path))
         request.httpMethod = HTTPMethod.post.rawValue
         
         let boundary = UUID().uuidString
         request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
-        request.setValue(apiKey, forHTTPHeaderField: "x-api-key")
+        if !apiKey.isEmpty {
+            request.setValue(apiKey, forHTTPHeaderField: "x-api-key")
+        }
         
         var body = Data()
         
@@ -127,7 +160,7 @@ final class APIClient {
         
         guard let httpResponse = response as? HTTPURLResponse,
               (200...299).contains(httpResponse.statusCode) else {
-            throw URLError(.badServerResponse)
+            throw APIError(message: errorMessage(from: responseData))
         }
         
         return responseData
