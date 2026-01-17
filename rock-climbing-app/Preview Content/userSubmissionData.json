@@ -1,0 +1,37 @@
+{
+    "user" : {
+        "firstName" : "Michael",
+        "lastName" : "Mobius",
+        "email" : "m.mobius@university.edu"
+    },
+    "submission" : {
+        "imageUrl" : "https://backwardsc.com/submissions/11/6/1768071873716.pdf",
+        "status" : "SUBMITTED"
+    },
+    "grades" : [
+        {
+            "id" : 200,
+            "questionNumber" : "1",
+            "questionText" : "Explain the difference between QuickSort and MergeSort worst-case time complexity.",
+            "maxPoints" : 5,
+            "grade" : 4,
+            "feedback" : "Good explanation of the average cases. You missed mentioning that QuickSort degrades to O(n^2) with poor pivot selection."
+        },
+        {
+            "id" : 201,
+            "questionNumber" : "2",
+            "questionText" : "Draw the resulting Binary Search Tree after inserting: 10, 5, 15, 2, 50.",
+            "maxPoints" : 5,
+            "grade" : 5,
+            "feedback" : "Perfect structure. Root and leaf nodes are correctly placed."
+        },
+        {
+            "id" : 202,
+            "questionNumber" : "3",
+            "questionText" : "Implement the 'deleteNode' function for a Singly Linked List.",
+            "maxPoints" : 20,
+            "grade" : 14,
+            "feedback" : "Logic is correct for the standard case. However, code fails to handle the edge case where the list is empty (head is null), resulting in a runtime error."
+        }
+    ]
+}

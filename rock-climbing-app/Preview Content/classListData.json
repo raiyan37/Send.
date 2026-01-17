@@ -1,0 +1,52 @@
+{
+    "classes" : [
+        {
+            "id" : 0,
+            "color" : "#2b7fff",
+            "courseName" : "Calculus I",
+            "courseCode" : "MAT 101",
+            "headcount" : 124,
+            "owner" : "Sarah Chen"
+        },
+        {
+            "id" : 1,
+            "color" : "#ad46ff",
+            "courseName" : "Intro to Computer Science",
+            "courseCode" : "CSC 101",
+            "headcount" : 85,
+            "owner" : "David Miller"
+        },
+        {
+            "id" : 2,
+            "color" : "#615fff",
+            "courseName" : "Data Structures and Algorithms",
+            "courseCode" : "CSC 202",
+            "headcount" : 62,
+            "owner" : "Anita Patel"
+        },
+        {
+            "id" : 3,
+            "color" : "#ff9f1c",
+            "courseName" : "Linear Algebra",
+            "courseCode" : "MAT 102",
+            "headcount" : 110,
+            "owner" : "Michael Rossi"
+        },
+        {
+            "id" : 4,
+            "color" : "#2ec4b6",
+            "courseName" : "Software Engineering Principles",
+            "courseCode" : "ENG 201",
+            "headcount" : 45,
+            "owner" : "Emily Johnson"
+        },
+        {
+            "id" : 5,
+            "color" : "#e71d36",
+            "courseName" : "Operating Systems",
+            "courseCode" : "CSC 301",
+            "headcount" : 58,
+            "owner" : "James Wilson"
+        }
+    ]
+}

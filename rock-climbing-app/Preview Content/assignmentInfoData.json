@@ -1,0 +1,139 @@
+{
+    "id" : 0,
+    "title" : "Midterm 1",
+    "submissionType" : "ADMIN_SCAN",
+    "dueDate": "2026-01-15T23:59:00Z",
+    "gradingGuidelines" : "You should award full marks for anyone that gets to the right answer. they do not need to show their work",
+    "totalAssignmentMarks" : 8,
+    "questions" : [
+        {
+            "id" : 200,
+            "questionNumber" : "1",
+            "questionText" : "What is 1 + 1?",
+            "maxPoints" : 2,
+            "solutionKey" : "1 + 1 = 2"
+        },
+        {
+            "id" : 201,
+            "questionNumber" : "2",
+            "questionText" : "What is 1 + 2?",
+            "maxPoints" : 2,
+            "solutionKey" : "1 + 2 = 3"
+        },
+        {
+            "id" : 202,
+            "questionNumber" : "3",
+            "questionText" : "What is 100 - 60?",
+            "maxPoints" : 20,
+            "solutionKey" : "100 - 60 = 40"
+        }
+    ],
+    "usersById": {
+        "101": {
+            "id": 101,
+            "firstName": "Lucian",
+            "lastName": "Cheng",
+            "email": "gf@gmail.com",
+            "role": "STUDENT"
+        },
+        "102": {
+            "id": 102,
+            "firstName": "George",
+            "lastName": "Fares",
+            "email": "gf@gmail.com",
+            "role": "OWNER"
+        },
+        "99": {
+            "id": 99,
+            "firstName": "Snaptik",
+            "lastName": "Singh",
+            "email": "gf@gmail.com",
+            "role": "STUDENT"
+        },
+        "98": {
+            "id": 98,
+            "firstName": "Yogesh",
+            "lastName": "Patel",
+            "email": "gf@gmail.com",
+            "role": "STUDENT"
+        },
+        "103": {
+            "id": 103,
+            "firstName": "Jogpreet",
+            "lastName": "Khader",
+            "email": "gf@gmail.com",
+            "role": "STUDENT"
+        },
+        "104": {
+            "id": 104,
+            "firstName": "Johanthan",
+            "lastName": "Sanchex",
+            "email": "gf@gmail.com",
+            "role": "STUDENT"
+        },
+        "105": {
+            "id": 105,
+            "firstName": "Mochir",
+            "lastName": "Moboic",
+            "email": "gf@gmail.com",
+            "role": "STUDENT"
+        },
+        "107": {
+            "id": 107,
+            "firstName": "Christopher",
+            "lastName": "Sarjoo",
+            "email": "gf@gmail.com",
+            "role": "STUDENT"
+        },
+        "108": {
+            "id": 108,
+            "firstName": "Vincent",
+            "lastName": "Lombardi",
+            "email": "gf@gmail.com",
+            "role": "STUDENT"
+        },
+        "109": {
+            "id": 109,
+            "firstName": "Luc",
+            "lastName": "Rajotte",
+            "email": "gf@gmail.com",
+            "role": "STUDENT"
+        },
+        "110": {
+            "id": 110,
+            "firstName": "Dajun",
+            "lastName": "Liang",
+            "email": "gf@gmail.com",
+            "role": "STUDENT"
+        },
+        "201": {
+            "id": 201,
+            "firstName": "Kylie",
+            "lastName": "Yang",
+            "email": "gf@gmail.com",
+            "role": "STUDENT"
+        }
+    },
+    "submissionsByStudentId": {
+        "101": {
+            "id": 5001,
+            "status": "GRADED"
+        },
+        "103": {
+            "id": 5002,
+            "status": "SUBMITTED"
+        },
+        "104": {
+            "id": 5003,
+            "status": "ERROR"
+        }
+    },
+    
+    "gradesByStudentId": {
+        "101": {
+            "id": 9001,
+            "score": 22
+        }
+    }
+    
+}
