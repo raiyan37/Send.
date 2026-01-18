@@ -1,4 +1,4 @@
-# rock-climber codebase guide
+# send codebase guide
 
 ## Repo layout
 
@@ -46,7 +46,7 @@ Docs: `http://localhost:8000/docs`
 
 ### Key files
 
-- App entry: `ios/rock-climbing-app/rock_climbing_appApp.swift`
+- App entry: `ios/rock-climbing-app/SendApp.swift`
 - Tabs: `ios/rock-climbing-app/Views/ContentView.swift`
 - “Scan Route” flows:
   - Camera: `ios/rock-climbing-app/Views/CameraView.swift`

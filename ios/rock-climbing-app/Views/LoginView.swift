@@ -1,6 +1,6 @@
 //
 //  LoginView.swift
-//  RockClimber
+//  Send
 //
 //  Created on 2026-01-17
 //
@@ -28,7 +28,7 @@ struct LoginView: View {
                     .font(.system(size: 80))
                     .foregroundColor(.blue)
                 
-                Text("RockClimber")
+                Text("Send")
                     .font(.largeTitle)
                     .fontWeight(.bold)
                 

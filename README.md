@@ -1,4 +1,4 @@
-# Rock Climber (Hackathon)
+# Send
 
 This repo contains:
 - `backend/`: FastAPI service that takes a climbing wall image, detects holds (YOLO), calibrates scale using an ArUco marker, and returns an annotated PNG route overlay.
@@ -44,7 +44,7 @@ pytest
 
 ## iOS app
 
-The iOS client reads the backend host/port from iOS Settings (Settings → RockClimber → Backend Server). If unset, it falls back to `ios/rock-climbing-app/Info.plist:1` (`BackendBaseURL`).
+The iOS client reads the backend host/port from iOS Settings (Settings → Send → Backend Server). If unset, it falls back to `ios/rock-climbing-app/Info.plist:1` (`BackendBaseURL`).
 
 - iOS Simulator: `BackendBaseURL` default `http://localhost:8000` works if the backend is running on your Mac.
 - Physical device: set the IP to your Mac’s LAN IP (e.g. `172.20.x.x`/`192.168.x.x`) and run `uvicorn api.main:app --host 0.0.0.0 --port 8000 --reload`.

@@ -1,6 +1,6 @@
 //
 //  HomeView.swift
-//  RockClimber
+//  Send
 //
 //  Created on 2026-01-17
 //
@@ -122,7 +122,7 @@ struct HomeView: View {
             }
             .padding(.top)
         }
-        .navigationTitle("RockClimber")
+        .navigationTitle("Send")
         #if !os(macOS)
         .navigationBarTitleDisplayMode(.large)
         #endif

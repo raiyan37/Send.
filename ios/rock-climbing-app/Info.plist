@@ -6,6 +6,10 @@
 	<string></string>
 	<key>BackendBaseURL</key>
 	<string>http://172.20.10.2:8000/</string>
+	<key>CFBundleDisplayName</key>
+	<string>Send</string>
+	<key>CFBundleName</key>
+	<string>Send</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>

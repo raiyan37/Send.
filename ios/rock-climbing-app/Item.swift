@@ -1,6 +1,6 @@
 //
 //  Item.swift
-//  rock-climbing-app
+//  Send
 //
 //  Created by Lindsay Cheng on 2026-01-17.
 //

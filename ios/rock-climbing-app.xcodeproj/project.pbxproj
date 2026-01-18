@@ -19,7 +19,7 @@
 		36DA3B9183AC40F784716382 /* routeFinderData.json in Resources */ = {isa = PBXBuildFile; fileRef = 9A5022F32FAF48EE8BB300EB /* routeFinderData.json */; };
 		4B8A372A8E0C481B8B01D646 /* ReadUserRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B7A83A043745E4905E1ECD /* ReadUserRequest.swift */; };
 		4E55149410054D9BB7F2F704 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BD12B9781440AC8F63AF6F /* ContentView.swift */; };
-		52B20462535A4254A7517E8E /* rock_climbing_appApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AC4DB4BEE14651B4406463 /* rock_climbing_appApp.swift */; };
+		52B20462535A4254A7517E8E /* SendApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AC4DB4BEE14651B4406463 /* SendApp.swift */; };
 		674365F67A7A41CC964D9873 /* UpdateClimbRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7797BB93EB4A5BBC958E6E /* UpdateClimbRequest.swift */; };
 		740E5EF93B604DCEB6321DC5 /* ScanRouteHubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D470E0C345C4B6DB7E8C952 /* ScanRouteHubView.swift */; };
 		782E91412F1C7FA800C6C2FE /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 38651EF02F1C100000AEFD55 /* GoogleSignIn */; };
@@ -54,7 +54,7 @@
 		13067E86DDCE46F7B871A1B2 /* DeleteUserRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteUserRequest.swift; sourceTree = "<group>"; };
 		1432BD8D6D8A48199C304F07 /* ClimbRecordingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClimbRecordingView.swift; sourceTree = "<group>"; };
 		1FA5F1D86DD440D19ADEBE24 /* ReadClimbRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadClimbRequest.swift; sourceTree = "<group>"; };
-		22AC4DB4BEE14651B4406463 /* rock_climbing_appApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rock_climbing_appApp.swift; sourceTree = "<group>"; };
+		22AC4DB4BEE14651B4406463 /* SendApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendApp.swift; sourceTree = "<group>"; };
 		27BD12B9781440AC8F63AF6F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		356242CAD59144918A4041CE /* HTTPSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPSetup.swift; sourceTree = "<group>"; };
 		38651E812F1BF0FA00AEFD55 /* rock-climbing-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "rock-climbing-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -119,7 +119,7 @@
 		38651E832F1BF0FA00AEFD55 /* rock-climbing-app */ = {
 			isa = PBXGroup;
 			children = (
-				22AC4DB4BEE14651B4406463 /* rock_climbing_appApp.swift */,
+				22AC4DB4BEE14651B4406463 /* SendApp.swift */,
 				E5A1513055E844738385CA0F /* Item.swift */,
 				D5551238A6B7478DB13E625A /* Views */,
 				73EABD04E8C14905A2ADB9EA /* Managers */,
@@ -236,7 +236,7 @@
 				38651EF02F1C100000AEFD55 /* GoogleSignIn */,
 				38651EF22F1C100000AEFD55 /* GoogleSignInSwift */,
 			);
-			productName = "rock-climbing-app";
+			productName = Send;
 			productReference = 38651E812F1BF0FA00AEFD55 /* rock-climbing-app.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -299,7 +299,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52B20462535A4254A7517E8E /* rock_climbing_appApp.swift in Sources */,
+				52B20462535A4254A7517E8E /* SendApp.swift in Sources */,
 				8D92A3D2BECA4A7490C27288 /* Item.swift in Sources */,
 				FBEBF5E49B9F480E85B6A0DA /* APIResponseManager.swift in Sources */,
 				B550F4E2807E4D8A9AD9768C /* CameraManager.swift in Sources */,
@@ -483,7 +483,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.lindsaycheng.rock-climbing-app";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Send;
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -529,7 +529,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.lindsaycheng.rock-climbing-app.rock-climbing-app";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Send;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				REGISTER_APP_GROUPS = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;

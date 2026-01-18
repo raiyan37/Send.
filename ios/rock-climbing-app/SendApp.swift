@@ -1,6 +1,6 @@
 //
-//  rock_climbing_appApp.swift
-//  rock-climbing-app
+//  SendApp.swift
+//  Send
 //
 //  Created by Lindsay Cheng on 2026-01-17.
 //
@@ -10,7 +10,7 @@ import SwiftData
 import GoogleSignIn
 
 @main
-struct rock_climbing_appApp: App {
+struct SendApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Item.self,
