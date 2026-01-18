@@ -182,6 +182,12 @@ struct CameraView: View {
         defer { isGeneratingRoute = false }
 
         do {
+            _ = try await APIClient.shared.requestData(
+                path: "/health",
+                method: .get,
+                timeoutInterval: 5
+            )
+
             let responseData = try await APIClient.shared.uploadMultipart(
                 path: "/boulder/generate",
                 data: imageData,

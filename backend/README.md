@@ -94,6 +94,12 @@ open http://localhost:8000/docs
 
 ### API Endpoints
 
+#### Health
+```bash
+GET /health
+# Response: {"message":"ok"}
+```
+
 #### Generate Route
 ```bash
 POST /boulder/generate

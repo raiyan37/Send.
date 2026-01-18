@@ -44,26 +44,8 @@ pytest
 
 ## iOS app
 
-The iOS client is configured via `ios/rock-climbing-app/Info.plist:1`:
-- `BackendBaseURL` defaults to `http://localhost:8000` (works for the iOS Simulator if the backend is running on your Mac).
-- For a physical device, set `BackendBaseURL` to `http://<your-mac-lan-ip>:8000` and run the backend with `--host 0.0.0.0`.
+The iOS client reads the backend host/port from iOS Settings (Settings → RockClimber → Backend Server). If unset, it falls back to `ios/rock-climbing-app/Info.plist:1` (`BackendBaseURL`).
 
-## Google OAuth setup (iOS + backend)
-
-### Google Cloud Console
-1. Create or select a Google Cloud project.
-2. Configure the OAuth consent screen (External or Internal).
-3. Create an **OAuth Client ID → iOS**:
-   - Set **Bundle ID** to your app bundle identifier (Xcode target settings).
-   - Copy the **iOS client ID** and **reversed client ID**.
-
-### iOS app configuration
-1. Add Swift Package dependency **GoogleSignIn** in Xcode.
-2. Update `Info.plist` (see keys below):
-   - `GoogleClientID` = your iOS client ID.
-   - `CFBundleURLTypes` → `CFBundleURLSchemes` includes your reversed client ID.
-3. Ensure the app handles the redirect URL (already wired in code).
-
-### Backend configuration
-1. Set env var for token verification:
-   - `GOOGLE_OAUTH_IOS_CLIENT_ID=<your-ios-client-id>`
+- iOS Simulator: `BackendBaseURL` default `http://localhost:8000` works if the backend is running on your Mac.
+- Physical device: set the IP to your Mac’s LAN IP (e.g. `172.20.x.x`/`192.168.x.x`) and run `uvicorn api.main:app --host 0.0.0.0 --port 8000 --reload`.
+- Quick sanity check: visit `http://<mac-ip>:8000/health` (should return `{"message":"ok"}`).

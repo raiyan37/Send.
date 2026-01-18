@@ -1,4 +1,5 @@
 import math
+from pathlib import Path
 import cv2
 from ultralytics import YOLO
 import numpy as np
@@ -8,9 +9,25 @@ from src.model.detected_object import DetectedObject
 from src.model.point import Point
 
 
+_MODEL: YOLO | None = None
+
+
+def _get_model() -> YOLO:
+    global _MODEL
+    if _MODEL is None:
+        model_path = Path(config.YOLO_MODEL_PATH)
+        if not model_path.exists():
+            raise FileNotFoundError(
+                f"YOLO model weights not found at {model_path}. "
+                f"Set YOLO_MODEL_PATH in backend/.env to a local .pt file."
+            )
+        _MODEL = YOLO(str(model_path))
+    return _MODEL
+
+
 def detect(img: cv2.typing.MatLike, conf: float = 0.85,
            imgsz: int = 1216) -> [DetectedObject]:
-    model = YOLO(config.YOLO_MODEL_PATH)
+    model = _get_model()
 
     results = model(
         img,

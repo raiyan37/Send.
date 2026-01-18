@@ -200,6 +200,12 @@ struct PhotoLibraryView: View {
                 errorMessage = "Failed to process image"
                 return
             }
+
+            _ = try await APIClient.shared.requestData(
+                path: "/health",
+                method: .get,
+                timeoutInterval: 5
+            )
             
             let responseData = try await APIClient.shared.uploadMultipart(
                 path: "/boulder/generate",

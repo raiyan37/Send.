@@ -5,18 +5,7 @@
 	<key>BackendAPIKey</key>
 	<string></string>
 	<key>BackendBaseURL</key>
-	<string>http://localhost:8000</string>
-	<key>GoogleClientID</key>
-	<string>794053407399-7fbgbi05jegdvgbsbpo1nu62la7gco27.apps.googleusercontent.com</string>
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>com.googleusercontent.apps.794053407399-7fbgbi05jegdvgbsbpo1nu62la7gco27</string>
-			</array>
-		</dict>
-	</array>
+	<string>http://172.20.10.2:8000/</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
