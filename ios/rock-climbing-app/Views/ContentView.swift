@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var isLoggedIn = false
+    @AppStorage("authToken") private var authToken = ""
     @State private var selectedTab = 0
     
     var body: some View {
-        if !isLoggedIn {
-            LoginView(isLoggedIn: $isLoggedIn)
+        if authToken.isEmpty {
+            LoginView()
         } else {
             TabView(selection: $selectedTab) {
                 NavigationView {

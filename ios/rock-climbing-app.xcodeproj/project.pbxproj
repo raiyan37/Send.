@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		782E91412F1C7FA800C6C2FE /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 38651EF02F1C100000AEFD55 /* GoogleSignIn */; };
+		782E91422F1C7FA800C6C2FE /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 38651EF22F1C100000AEFD55 /* GoogleSignInSwift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		38651E812F1BF0FA00AEFD55 /* rock-climbing-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "rock-climbing-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +41,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				782E91422F1C7FA800C6C2FE /* GoogleSignInSwift in Frameworks */,
+				782E91412F1C7FA800C6C2FE /* GoogleSignIn in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +85,8 @@
 			);
 			name = "rock-climbing-app";
 			packageProductDependencies = (
+				38651EF02F1C100000AEFD55 /* GoogleSignIn */,
+				38651EF22F1C100000AEFD55 /* GoogleSignInSwift */,
 			);
 			productName = "rock-climbing-app";
 			productReference = 38651E812F1BF0FA00AEFD55 /* rock-climbing-app.app */;
@@ -107,6 +116,9 @@
 			);
 			mainGroup = 38651E782F1BF0FA00AEFD55;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				38651EEF2F1C100000AEFD55 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 38651E822F1BF0FA00AEFD55 /* Products */;
 			projectDirPath = "";
@@ -259,15 +271,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				"CODE_SIGNING_ALLOWED[sdk=iphonesimulator*]" = NO;
+				CODE_SIGN_ENTITLEMENTS = "rock-climbing-app/rock-climbing-app.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 464H3K5669;
-				ENABLE_APP_SANDBOX = YES;
-				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_APP_SANDBOX = NO;
+				ENABLE_HARDENED_RUNTIME = NO;
 				ENABLE_PREVIEWS = YES;
-				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "rock-climbing-app/Info.plist";
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app needs access to your camera to record climbing sessions and take photos of routes.";
@@ -308,14 +319,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				"CODE_SIGNING_ALLOWED[sdk=iphonesimulator*]" = NO;
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_ENTITLEMENTS = "rock-climbing-app/rock-climbing-app.entitlements";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
-				ENABLE_APP_SANDBOX = YES;
-				ENABLE_HARDENED_RUNTIME = YES;
+				DEVELOPMENT_TEAM = 464H3K5669;
+				ENABLE_APP_SANDBOX = NO;
+				ENABLE_HARDENED_RUNTIME = NO;
 				ENABLE_PREVIEWS = YES;
-				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "rock-climbing-app/Info.plist";
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app needs access to your camera to record climbing sessions and take photos of routes.";
@@ -373,6 +383,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		38651EEF2F1C100000AEFD55 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		38651EF02F1C100000AEFD55 /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 38651EEF2F1C100000AEFD55 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		38651EF22F1C100000AEFD55 /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 38651EEF2F1C100000AEFD55 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 38651E792F1BF0FA00AEFD55 /* Project object */;
 }

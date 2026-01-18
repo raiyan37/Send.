@@ -8,8 +8,16 @@
 import SwiftUI
 
 struct ProfileView: View {
+    @AppStorage("userFirstName") private var userFirstName = ""
+    @AppStorage("userLastName") private var userLastName = ""
+    @AppStorage("userPhotoURL") private var userPhotoURL = ""
     @State private var selectedTab = "Stats"
     let tabs = ["Stats", "History", "Settings"]
+    
+    private var displayName: String {
+        let name = "\(userFirstName) \(userLastName)".trimmingCharacters(in: .whitespaces)
+        return name.isEmpty ? "Climber" : name
+    }
     
     var body: some View {
         ScrollView {
@@ -17,13 +25,27 @@ struct ProfileView: View {
                 // profile header
                 VStack(spacing: 15) {
                     // avatar
-                    Image(systemName: "person.circle.fill")
-                        .font(.system(size: 100))
-                        .foregroundColor(.blue)
+                    if let url = URL(string: userPhotoURL), !userPhotoURL.isEmpty {
+                        AsyncImage(url: url) { image in
+                            image
+                                .resizable()
+                                .scaledToFill()
+                        } placeholder: {
+                            Image(systemName: "person.circle.fill")
+                                .font(.system(size: 100))
+                                .foregroundColor(.blue)
+                        }
+                        .frame(width: 100, height: 100)
+                        .clipShape(Circle())
+                    } else {
+                        Image(systemName: "person.circle.fill")
+                            .font(.system(size: 100))
+                            .foregroundColor(.blue)
+                    }
                     
                     // name and stats summary
                     VStack(spacing: 5) {
-                        Text("John Doe")
+                        Text(displayName)
                             .font(.title2)
                             .fontWeight(.bold)
                         
@@ -170,6 +192,11 @@ struct HistoryTabView: View {
 }
 
 struct SettingsTabView: View {
+    @AppStorage("authToken") private var authToken = ""
+    @AppStorage("currentUserId") private var currentUserId = ""
+    @AppStorage("userFirstName") private var userFirstName = ""
+    @AppStorage("userLastName") private var userLastName = ""
+    @AppStorage("userPhotoURL") private var userPhotoURL = ""
     @State private var notificationsEnabled = true
     @State private var profilePublic = true
     @State private var showInLeaderboard = true
@@ -233,7 +260,7 @@ struct SettingsTabView: View {
                 }
                 
                 Button(action: {
-                    // TODO: sign out
+                    signOut()
                 }) {
                     Text("Sign Out")
                         .foregroundColor(.red)
@@ -244,6 +271,14 @@ struct SettingsTabView: View {
                 }
             }
         }
+    }
+    
+    private func signOut() {
+        authToken = ""
+        currentUserId = ""
+        userFirstName = ""
+        userLastName = ""
+        userPhotoURL = ""
     }
 }
 
