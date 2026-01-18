@@ -45,5 +45,7 @@ pytest
 ## iOS app
 
 The iOS client is configured via `ios/rock-climbing-app/Info.plist:1`:
-- `BackendBaseURL` defaults to `http://localhost:8000` (works for the iOS Simulator if the backend is running on your Mac).
+- `BackendBaseURL` defaults to `http://127.0.0.1:8000` (works for the iOS Simulator if the backend is running on your Mac).
 - For a physical device, set `BackendBaseURL` to `http://<your-mac-lan-ip>:8000` and run the backend with `--host 0.0.0.0`.
+
+You can also change the URL in-app from the Camera screen (gear icon), which saves an override to `UserDefaults` under `BackendBaseURLOverride`.

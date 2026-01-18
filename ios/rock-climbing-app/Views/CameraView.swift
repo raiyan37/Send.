@@ -19,6 +19,7 @@ struct CameraView: View {
     @State private var routeImage: UIImage?
     @State private var showRouteAnalysis = false
     @State private var errorMessage: String?
+    @State private var showBackendSettings = false
     
     enum CaptureMode {
         case photo
@@ -81,14 +82,25 @@ struct CameraView: View {
                     }
                     
                     Spacer()
-                    
-                    Button(action: {
-                        cameraManager.switchCamera()
-                    }) {
-                        Image(systemName: "arrow.triangle.2.circlepath.camera")
-                            .font(.title2)
-                            .foregroundColor(.white)
-                            .padding()
+
+                    HStack(spacing: 0) {
+                        Button(action: {
+                            showBackendSettings = true
+                        }) {
+                            Image(systemName: "gearshape")
+                                .font(.title2)
+                                .foregroundColor(.white)
+                                .padding()
+                        }
+
+                        Button(action: {
+                            cameraManager.switchCamera()
+                        }) {
+                            Image(systemName: "arrow.triangle.2.circlepath.camera")
+                                .font(.title2)
+                                .foregroundColor(.white)
+                                .padding()
+                        }
                     }
                 }
                 
@@ -136,6 +148,7 @@ struct CameraView: View {
         .onReceive(cameraManager.$capturedPhotoData) { newData in
             guard let newData else { return }
             guard !isGeneratingRoute else { return }
+            cameraManager.capturedPhotoData = nil
             Task { await generateRoute(imageData: newData) }
         }
         .overlay {
@@ -163,6 +176,9 @@ struct CameraView: View {
             Button("OK", role: .cancel) { errorMessage = nil }
         } message: {
             Text(errorMessage ?? "")
+        }
+        .sheet(isPresented: $showBackendSettings) {
+            BackendSettingsView()
         }
     }
     
@@ -198,6 +214,8 @@ struct CameraView: View {
             showRouteAnalysis = true
         } catch let apiError as APIError {
             errorMessage = apiError.message
+        } catch let urlError as URLError {
+            errorMessage = "\(urlError.localizedDescription)\nURL: \(APIClient.shared.baseURLString)"
         } catch {
             errorMessage = error.localizedDescription
         }

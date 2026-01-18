@@ -5,7 +5,7 @@
 	<key>BackendAPIKey</key>
 	<string></string>
 	<key>BackendBaseURL</key>
-	<string>http://localhost:8000</string>
+	<string>http://127.0.0.1:8000</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>

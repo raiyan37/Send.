@@ -38,20 +38,51 @@ final class APIClient {
     static let shared = APIClient()
     private init() {}
 
-    private let baseURL: URL = {
-        let urlString = (Bundle.main.object(forInfoDictionaryKey: "BackendBaseURL") as? String)?
-            .trimmingCharacters(in: .whitespacesAndNewlines)
-        let fallback = "http://localhost:8000"
-        return URL(string: (urlString?.isEmpty == false) ? urlString! : fallback)!
-    }()
+    static let backendBaseURLOverrideKey = "BackendBaseURLOverride"
+    private static let defaultBaseURLString = "http://127.0.0.1:8000"
 
-    private let apiKey: String = {
+    private var baseURL: URL {
+        let overrideString = UserDefaults.standard.string(forKey: Self.backendBaseURLOverrideKey)
+        let infoPlistString = Bundle.main.object(forInfoDictionaryKey: "BackendBaseURL") as? String
+
+        let candidates = [
+            overrideString,
+            infoPlistString,
+            Self.defaultBaseURLString
+        ]
+
+        for candidate in candidates {
+            guard let candidate else { continue }
+            let trimmed = candidate.trimmingCharacters(in: .whitespacesAndNewlines)
+            guard !trimmed.isEmpty else { continue }
+
+            let normalized = normalizeBaseURLString(trimmed)
+            guard let url = URL(string: normalized), url.scheme != nil, url.host != nil else { continue }
+            return url
+        }
+
+        return URL(string: Self.defaultBaseURLString)!
+    }
+
+    var baseURLString: String {
+        baseURL.absoluteString
+    }
+
+    private var apiKey: String {
         (Bundle.main.object(forInfoDictionaryKey: "BackendAPIKey") as? String) ?? ""
-    }()
+    }
+
+    private func normalizeBaseURLString(_ urlString: String) -> String {
+        if urlString.contains("://") {
+            return urlString.trimmingCharacters(in: CharacterSet(charactersIn: "/"))
+        }
+        return "http://\(urlString)".trimmingCharacters(in: CharacterSet(charactersIn: "/"))
+    }
 
     private func makeURL(path: String) -> URL {
-        let normalizedPath = path.hasPrefix("/") ? String(path.dropFirst()) : path
-        return baseURL.appendingPathComponent(normalizedPath)
+        let trimmedPath = path.trimmingCharacters(in: .whitespacesAndNewlines)
+        let relativePath = trimmedPath.hasPrefix("/") ? trimmedPath : "/\(trimmedPath)"
+        return URL(string: relativePath, relativeTo: baseURL)?.absoluteURL ?? baseURL
     }
 
     private func errorMessage(from data: Data) -> String {
