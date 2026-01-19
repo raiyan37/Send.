@@ -2,6 +2,8 @@
 
 A climbing app where you snap a photo of any wall and instantly see optimal routes mapped out using OpenCV. Track your climbs, record attempts, and build your climbing portfolio with computer vision route detection.
 
+Devpost: https://devpost.com/software/send-lc1vy4#updates
+
 ## Overview
 
 Send combines YOLO-based hold detection with intelligent route planning to help climbers visualize paths up any wall. The app includes session tracking, progress analytics, and real-time climb recording to help you improve your technique and reach your goals.
